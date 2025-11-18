@@ -1,0 +1,45 @@
+{% extends 'game/base.html' %}
+
+{% block title %}Home - Math Game{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px 0;">
+    <h1 style="font-size: 3em; margin-bottom: 20px;">🎮 Multiplication Table Game</h1>
+    <p style="font-size: 1.3em; color: #4a5568; margin-bottom: 40px;">
+        Practice your multiplication skills and advance through levels!
+    </p>
+    
+    {% if user.is_authenticated %}
+        <div style="background: #edf2f7; padding: 30px; border-radius: 10px; margin-bottom: 30px;">
+            <h2>Welcome back, {{ user.username }}! 👋</h2>
+            <p style="margin: 20px 0; font-size: 1.1em;">Ready to practice?</p>
+            <a href="{% url 'game' %}" class="btn" style="font-size: 1.2em; padding: 15px 30px;">Start Playing</a>
+        </div>
+    {% else %}
+        <div style="background: #edf2f7; padding: 30px; border-radius: 10px; margin-bottom: 30px;">
+            <h2>Get Started</h2>
+            <p style="margin: 20px 0;">Sign up or log in to start practicing!</p>
+            <a href="{% url 'register' %}" class="btn" style="margin: 10px;">Register</a>
+            <a href="{% url 'login' %}" class="btn btn-secondary" style="margin: 10px;">Login</a>
+        </div>
+    {% endif %}
+    
+    <div style="text-align: left; margin-top: 50px;">
+        <h2 style="text-align: center; margin-bottom: 30px;">✨ Features</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div style="background: #f7fafc; padding: 20px; border-radius: 10px; border-left: 4px solid #667eea;">
+                <h3 style="color: #667eea; margin-bottom: 10px;">📈 Multiple Levels</h3>
+                <p style="color: #4a5568;">Progress through 10 difficulty levels, from simple 1-3 multiplication to advanced 1-12 tables.</p>
+            </div>
+            <div style="background: #f7fafc; padding: 20px; border-radius: 10px; border-left: 4px solid #48bb78;">
+                <h3 style="color: #48bb78; margin-bottom: 10px;">👥 Multiple Users</h3>
+                <p style="color: #4a5568;">Each user has their own account and progresses at their own pace.</p>
+            </div>
+            <div style="background: #f7fafc; padding: 20px; border-radius: 10px; border-left: 4px solid #ed8936;">
+                <h3 style="color: #ed8936; margin-bottom: 10px;">📊 Track Progress</h3>
+                <p style="color: #4a5568;">Monitor your accuracy, total questions answered, and level advancement.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

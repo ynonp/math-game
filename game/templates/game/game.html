@@ -1,0 +1,50 @@
+{% extends 'game/base.html' %}
+
+{% block title %}Play - Math Game{% endblock %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>Level {{ profile.current_level }} 🎯</h1>
+    
+    <div style="background: #edf2f7; padding: 20px; border-radius: 10px; margin: 20px 0; display: flex; justify-content: space-around; align-items: center;">
+        <div>
+            <div style="font-size: 2em; font-weight: bold; color: #667eea;">{{ profile.total_correct }}</div>
+            <div style="color: #718096;">Correct</div>
+        </div>
+        <div>
+            <div style="font-size: 2em; font-weight: bold; color: #4a5568;">{{ profile.total_attempts }}</div>
+            <div style="color: #718096;">Total</div>
+        </div>
+        <div>
+            <div style="font-size: 2em; font-weight: bold; color: #48bb78;">{{ accuracy|floatformat:1 }}%</div>
+            <div style="color: #718096;">Accuracy</div>
+        </div>
+    </div>
+    
+    <div style="background: white; padding: 50px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 30px auto; max-width: 500px;">
+        <h2 style="font-size: 4em; color: #2d3748; margin-bottom: 30px;">
+            {{ exercise.number1 }} × {{ exercise.number2 }} = ?
+        </h2>
+        
+        <form method="post" style="margin-top: 30px;">
+            {% csrf_token %}
+            <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+            
+            <input type="number" 
+                   name="answer" 
+                   placeholder="Enter your answer" 
+                   autofocus
+                   required
+                   style="font-size: 2em; text-align: center; padding: 20px;">
+            
+            <button type="submit" class="btn" style="width: 100%; margin-top: 20px; font-size: 1.2em; padding: 15px;">
+                Submit Answer
+            </button>
+        </form>
+    </div>
+    
+    <div style="margin-top: 30px;">
+        <a href="{% url 'progress' %}" class="btn btn-secondary">View Progress</a>
+    </div>
+</div>
+{% endblock %}
